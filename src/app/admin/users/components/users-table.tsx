@@ -157,13 +157,14 @@ export default function UsersTable() {
 
   const getUsersExportData = () => {
     const TITLE = "Lista de usuarios";
-    const rec = data?.map(({ user, person }) => ({
+    const rec = data?.map(({ user, person, role }) => ({
       names: `${person.names} ${person.surnames}`,
       "user.email": user.email,
       "person.dni": person.dni,
       "person.phone": person.phone,
       "person.address": person.address,
-      age: dayjs().diff(person.birthdate, "years").toString()
+      age: dayjs().diff(person.birthdate, "years").toString(),
+      "role.roleName": role.roleName
     }));
 
     const columns = usersColumns
