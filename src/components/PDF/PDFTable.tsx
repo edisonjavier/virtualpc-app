@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 
 export type CellValue = string | string[];
 
-const MAX_TEXT_LENGTH = 25;
+const MAX_TEXT_LENGTH = 20;
 const MAX_COLUMN_WIDTH = MAX_TEXT_LENGTH - 5;
 
 export default function PDFTable<T>({ columns, records }: { columns: TableColumns[]; records: T[] }) {
@@ -101,7 +101,10 @@ export default function PDFTable<T>({ columns, records }: { columns: TableColumn
     <View style={styles.table}>
       <View style={{ ...styles.tableRow, backgroundColor: "#18181b" }}>
         {columns.map((col) => (
-          <View key={col.title} style={{ ...styles.tableCol, width: tableData.columnWidths[col.accessor] }}>
+          <View
+            key={col.title}
+            style={{ ...styles.tableCol, width: tableData.columnWidths[col.accessor], marginRight: 5 }}
+          >
             <Text style={{ ...styles.tableHeader, ...styles.tableCell }}>{col.title}</Text>
           </View>
         ))}
@@ -111,7 +114,7 @@ export default function PDFTable<T>({ columns, records }: { columns: TableColumn
           {columns.map((col) => (
             <View
               key={`${col.accessor.toString()}${idx}`}
-              style={{ ...styles.tableCol, width: tableData.columnWidths[col.accessor] }}
+              style={{ ...styles.tableCol, width: tableData.columnWidths[col.accessor], marginRight: 5 }}
             >
               <Text style={styles.tableCell}>{getCellValue(rec[col.accessor as keyof T] as CellValue)}</Text>
             </View>
